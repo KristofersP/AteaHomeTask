@@ -1,6 +1,6 @@
 ﻿using BillingApi.Models;
 
-namespace BillingApi.Services
+namespace BillingApi.Services.Validators
 {
     public class OrderValidator : IValidator
     {

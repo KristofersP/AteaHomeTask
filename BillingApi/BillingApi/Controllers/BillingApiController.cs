@@ -1,4 +1,6 @@
-﻿using BillingApi.Models;
+﻿using BillingApi.Core.Services;
+using BillingApi.Database;
+using BillingApi.Models;
 using BillingApi.Services;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
@@ -10,25 +12,28 @@ namespace BillingApi.Controllers
     [ApiController]
     public class BillingApiController : ControllerBase
     {
-        private readonly BillingService _billingService;
+        private readonly IBillingService _billingService;
         private readonly IEnumerable<IValidator> _validators;
+        protected readonly IBillingApiDbContext _context;
 
-        public BillingApiController(IEnumerable<IValidator> validators)
+        public BillingApiController(IEnumerable<IValidator> validators, IBillingService billingService, IBillingApiDbContext context)
         {
-            _billingService = new BillingService();
+            _billingService = billingService;
             _validators = validators;
+            _context = context;
         }
 
-        [HttpGet]
+        [HttpPut]
         [Route("confirmation")]
         public IActionResult ConfirmOrder(Order order)
         {
             if (!_validators.All(v => v.IsValid(order)))
                 return BadRequest();
 
+            _billingService.Create(order);
 
-
-            return Ok(_billingService.ConfirmOrder(order));
+            var receipt = _billingService.MapPayementGateway(order);
+            return Ok(receipt);
         }
     }
 }

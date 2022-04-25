@@ -1,6 +1,6 @@
 ﻿using BillingApi.Models;
 
-namespace BillingApi.Services.Valdiators
+namespace BillingApi.Services.Validators
 {
     public class PaymentGatewayValidator : IValidator
     {
