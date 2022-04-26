@@ -6,7 +6,7 @@ namespace BillingApi.Services.Validators
     {
         public bool IsValid(Order order)
         {
-            return order.PaymentGateway != null;
+            return !string.IsNullOrEmpty(order.PaymentGateway);
         }
     }
 }

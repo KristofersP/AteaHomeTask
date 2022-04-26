@@ -9,7 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BillingApi.Database", "Bill
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BillingApi.Core", "BillingApi.Core\BillingApi.Core.csproj", "{057C59EC-6A97-4060-8B83-294D067CFDF0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BillingApi.Service", "BillingApi.Service\BillingApi.Service.csproj", "{A9255C76-1816-4B86-956F-C00CD0890391}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BillingApi.Service", "BillingApi.Service\BillingApi.Service.csproj", "{A9255C76-1816-4B86-956F-C00CD0890391}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BillingApi.Test", "BillingApi.Test\BillingApi.Test.csproj", "{6FDE76B8-A4DA-42A0-BB77-7C1FBC8716B4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{A9255C76-1816-4B86-956F-C00CD0890391}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A9255C76-1816-4B86-956F-C00CD0890391}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A9255C76-1816-4B86-956F-C00CD0890391}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6FDE76B8-A4DA-42A0-BB77-7C1FBC8716B4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6FDE76B8-A4DA-42A0-BB77-7C1FBC8716B4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6FDE76B8-A4DA-42A0-BB77-7C1FBC8716B4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6FDE76B8-A4DA-42A0-BB77-7C1FBC8716B4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
