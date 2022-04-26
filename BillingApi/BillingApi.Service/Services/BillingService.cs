@@ -8,10 +8,9 @@ namespace BillingApi.Services
 {
     public class BillingService: EntityService<Order>,IBillingService
     {
-        protected readonly IBillingApiDbContext _context;
         public BillingService(IBillingApiDbContext context) : base(context)
         {
-            _context = context;
+            
         }
 
         public Receipt MapPayementGateway(Order order)
