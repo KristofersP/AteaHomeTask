@@ -9,6 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using BillingApi.Services.Validators;
 using BillingApi.Services;
 using BillingApi.Core.Services;
+using BillingApi.Service.Services.GatewayHandlers;
 
 namespace BillingApi
 {
@@ -40,6 +41,9 @@ namespace BillingApi
             services.AddTransient<IValidator, OrderValidator>();
             services.AddTransient<IValidator, PaymentGatewayValidator>();
             services.AddTransient<IBillingService, BillingService>();
+            services.AddTransient<IPaymentGateway, AmazonPaymentGatewayHandler>();
+            services.AddTransient<IPaymentGateway, PayPalGatewayHandler>();
+            services.AddTransient<IPaymentGateway, StripeGatewayHandler>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -3,14 +3,17 @@ using BillingApi.Database;
 using BillingApi.Models;
 using BillingApi.Service.Services;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace BillingApi.Services
 {
     public class BillingService: EntityService<Order>,IBillingService
     {
-        public BillingService(IBillingApiDbContext context) : base(context)
+        private readonly IEnumerable<IPaymentGateway> _gatewayHandlers;
+        public BillingService(IBillingApiDbContext context,IEnumerable<IPaymentGateway> gatewayHandlers) : base(context)
         {
-            
+            _gatewayHandlers = gatewayHandlers;
         }
 
         public Receipt MapPayementGateway(Order order)
@@ -21,27 +24,12 @@ namespace BillingApi.Services
             receipt.Description = order.Description;
             receipt.Date = DateTime.Now.ToString();
 
-            if (order.PaymentGateway.ToLower() == "paypal")
-            {
-                receipt.PaymentGateway = "PayPal";
-                _context.Receipts.Add(receipt);
-                _context.SaveChanges();
-                return receipt;
-            }
-            else if (order.PaymentGateway.ToLower() == "stripe")
-            {
-                receipt.PaymentGateway = "Stripe";
-                _context.Receipts.Add(receipt);
-                _context.SaveChanges();
-                return receipt;
-            }
-            else
-            {
-                receipt.PaymentGateway = "AmazonPay";
-                _context.Receipts.Add(receipt);
-                _context.SaveChanges();
-                return receipt;
-            }
+            var handler = _gatewayHandlers.SingleOrDefault(h => h.GatewayName.ToLower() == order.PaymentGateway);
+            receipt.PaymentGateway = handler.GetGateway(order);
+            _context.Receipts.Add(receipt);
+            _context.SaveChanges();
+
+            return receipt;
         }
         
     }
